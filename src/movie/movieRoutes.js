@@ -1,6 +1,6 @@
 // require express router
 const { Router } = require("express");
-const {  addMovie, listMovies } = require("./movieControllers");
+const {  addMovie, listMovies, updateMovie, deleteMovie } = require("./movieControllers");
 // handle routes we want to create
 const movieRouter = Router();
 
@@ -8,5 +8,9 @@ const movieRouter = Router();
 movieRouter.post("/movie", addMovie);
 
 movieRouter.get("/movie", listMovies);
+
+movieRouter.put("/movie/:id", updateMovie);
+
+movieRouter.delete("/movie/:id", deleteMovie);
 
 module.exports = movieRouter;

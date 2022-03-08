@@ -1,4 +1,3 @@
-const { ObjectId } = require("bson");
 const Movie = require("./movieModel");
 
 // movie controller 
@@ -28,11 +27,8 @@ exports.listMovies = async (req, res) => {
 exports.updateMovie = async (req, res) => {
     try {
         const updateMovie = await Movie.updateOne(
-            {_id: req.params.id},
-            {set: {
-                title: req.body
-            }});
-            // res.status(200).send({allMovie: updateMovie});
+            {_id: req.params.id}, req.body);
+            res.status(200).send({movie: updateMovie});
     } catch (error) {
         console.log(error);
         // display error to user 

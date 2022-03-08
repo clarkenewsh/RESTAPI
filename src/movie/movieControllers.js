@@ -30,8 +30,7 @@ exports.updateMovie = async (req, res) => {
         const updateMovie = await Movie.updateOne(
             {_id: req.params.id},
             {set: {
-                title: req.body.title,
-                actors: req.body.actors,
+                title: req.body
             }});
             // res.status(200).send({allMovie: updateMovie});
     } catch (error) {
@@ -43,7 +42,8 @@ exports.updateMovie = async (req, res) => {
 
 exports.deleteMovie = async (req, res) => {
     try {
-        const deleteMovie = await deleteOne({_id: req.params.id});
+        const deleteMovie = await Movie.deleteOne({_id: req.params.id});
+        res.status(200).send();
     } catch(error) {
         console.log(error);
         // display error to user 

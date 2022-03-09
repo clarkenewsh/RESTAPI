@@ -20,3 +20,21 @@ exports.addUser = async (req, res) => {
       res.status(500).send({ err: error.message });
     }
   };
+
+  // update user password from an already logged in user
+  exports.updatePassword = async (req, res) =>{
+    try {
+        const updateUser = await User.updateOne(
+            {username: req.user.username}, 
+            {password: req.body.password}
+            );
+            if (updateUser.modifiedCount > 0) {
+                res.status(200).send({msg : "Successfully updated user"})
+            } else {
+                throw new Error("Did not update");
+            }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ err: error.message });
+    }
+  }

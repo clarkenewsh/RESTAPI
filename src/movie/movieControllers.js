@@ -28,7 +28,12 @@ exports.updateMovie = async (req, res) => {
     try {
         const updateMovie = await Movie.updateOne(
             {_id: req.params.id}, req.body);
-            res.status(200).send({movie: updateMovie});
+            // res.status(200).send({msg: "Successfully updated movie"});
+            if (updateMovie.modifiedCount > 0) {
+                res.status(200).send({msg : "Successfully updated movie"})
+            } else {
+                throw new Error("Did not update");
+            }
     } catch (error) {
         console.log(error);
         // display error to user 
@@ -45,4 +50,5 @@ exports.deleteMovie = async (req, res) => {
         // display error to user 
         res.status(500).send({err: error.message});
     }
-}
+};
+

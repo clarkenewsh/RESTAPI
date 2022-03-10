@@ -22,7 +22,7 @@ exports.addUser = async (req, res) => {
   };
 
   // update user password from an already logged in user
-  exports.updatePassword = async (req, res) =>{
+  exports.updatePassword = async (req, res) => {
     try {
         const updateUser = await User.updateOne(
             {username: req.user.username}, 
@@ -37,4 +37,18 @@ exports.addUser = async (req, res) => {
         console.log(error);
         res.status(500).send({ err: error.message });
     }
-  }
+  };
+
+  exports.deleteUser = async (req, res) => {
+    try {
+      const deleteUser = await User.deleteOne({_id: req.params.id});
+      // if (deleteUser.modifiedCount > 0) {
+        res.status(200).send({msg : "Successfully deleted user"})
+    // } else {
+    //     throw new Error("Did not delete");
+    // }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ err: error.message });
+    }
+  };
